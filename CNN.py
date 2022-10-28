@@ -64,10 +64,10 @@ def load_checkpoint(checkpoint):
     model.load_state_dict(checkpoint["model"])
     optimizer.load_state_dict(checkpoint["optimizer"])
 
-# Load Data
+# Load Data train
 train_dataset = datasets.MNIST(root="dataset/", train=True, transform=transforms.ToTensor(), download=True)
 test_dataset = datasets.MNIST(root="dataset/", train=False, transform=transforms.ToTensor(), download=True)
-
+# Load Data test
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=True)
 
@@ -105,6 +105,7 @@ for epoch in range(num_epochs):
 
         # gradient descent or adam step
         optimizer.step()
+    # for debugging purpose
     print(f"Loss at epoch {epoch}: {loss.item()}")
 
 # Check accuracy on training & test to see how good our model
@@ -132,6 +133,6 @@ def check_accuracy(loader, model):
     model.train()
     return num_correct/num_samples
 
-
+# Printing the accuracy
 print(f"Accuracy on training set: {check_accuracy(train_loader, model)*100:.2f}")
 print(f"Accuracy on test set: {check_accuracy(test_loader, model)*100:.2f}")
