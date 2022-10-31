@@ -33,6 +33,7 @@ train_dataset = datasets.MNIST(root = "dataset/MNIST", train=True, transform=tra
 train_loader = DataLoader(dataset = train_dataset, batch_size=batch_size, shuffle=True)
 print(f"Train Loader = {train_loader}")
 
+# For testing purposes
 test_dataset = datasets.MNIST(root = "dataset/MNIST", train=False, transform=transforms.ToTensor(), download=True)
 test_loader = DataLoader(dataset = test_dataset, batch_size=batch_size, shuffle=True)
 
@@ -87,9 +88,10 @@ def check_accuracy(loader, model):
             _, predictions = scores.max(dim=1)
             num_correct += (predictions == y).sum()
             num_samples += predictions.size(0)
-        
+        # printing the accuracy
         print(f"Got {num_correct} / {num_samples} with accuracy {float(num_correct) / float(num_samples)*100:.2f}")
-
+    
+    #training the model
     model.train()
 
 if __name__ == "__main__":
